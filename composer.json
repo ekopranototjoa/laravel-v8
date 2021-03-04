@@ -18,6 +18,7 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -57,6 +58,15 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "cs-default": [
+            "php-cs-fixer fix -v --config=.php_cs --using-cache=no --path-mode=intersection --allow-risky=yes --ansi"
+        ],
+        "cs-fix": [
+            "@composer cs-default -- `git diff --name-only --diff-filter=d master | grep php`"
+        ],
+        "cs": [
+            "@composer cs-default -- `git diff --name-only --diff-filter=d master | grep php` --diff --dry-run"
         ]
     }
 }
